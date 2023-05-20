@@ -31,7 +31,7 @@ public class WhatsappController {
     }
 
     @PostMapping("/add-group")
-    public Group createGroup(List<User> users){
+    public Group createGroup(@RequestBody List<User> users) throws Exception {
         // The list contains at least 2 users where the first user is the admin. A group has exactly one admin.
         // If there are only 2 users, the group is a personal chat and the group name should be kept as the name of the second user(other than admin)
         // If there are 2+ users, the name of group should be "Group count". For example, the name of first group would be "Group 1", second would be "Group 2" and so on.
@@ -53,7 +53,7 @@ public class WhatsappController {
     }
 
     @PutMapping("/send-message")
-    public int sendMessage(Message message, User sender, Group group) throws Exception{
+    public int sendMessage(@RequestBody Message message,@RequestBody User sender,@RequestBody Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
@@ -61,7 +61,7 @@ public class WhatsappController {
         return whatsappService.sendMessage(message, sender, group);
     }
     @PutMapping("/change-admin")
-    public String changeAdmin(User approver, User user, Group group) throws Exception{
+    public String changeAdmin(@RequestBody User approver,@RequestBody User user,@RequestBody Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "Approver does not have rights" if the approver is not the current admin of the group
         //Throw "User is not a participant" if the user is not a part of the group
@@ -71,7 +71,7 @@ public class WhatsappController {
     }
 
     @DeleteMapping("/remove-user")
-    public int removeUser(User user) throws Exception{
+    public int removeUser(@RequestBody User user) throws Exception{
         //This is a bonus problem and does not contains any marks
         //A user belongs to exactly one group
         //If user is not found in any group, throw "User not found" exception
