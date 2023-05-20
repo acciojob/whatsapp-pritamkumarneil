@@ -60,11 +60,11 @@ public class WhatsappRepository {
         // first check if all user is available in the userMap or not
         // check how many user are available in the list
         // if 2 -> then don't update the groupCount
-        for(User user: users){
-            if(!userMap.containsKey(user.getMobile())){
-                throw new Exception(user.getName()+" doesn't exist");
-            }
-        }
+//        for(User user: users){
+//            if(!userMap.containsKey(user.getMobile())){
+//                throw new Exception(user.getName()+" doesn't exist");
+//            }
+//        }
         // ideally we should check if the personal chat of group is already exist or not
         if(users.size()==2){
             User user1=userMap.get(users.get(0).getMobile());
