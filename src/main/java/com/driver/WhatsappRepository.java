@@ -67,8 +67,10 @@ public class WhatsappRepository {
 //        }
         // ideally we should check if the personal chat of group is already exist or not
         if(users.size()==2){
-            User user1=userMap.get(users.get(0).getMobile());
-            User user2 =userMap.get(users.get(1).getMobile());
+            //User user1=userMap.get(users.get(0).getMobile());
+            User user1=users.get(0);
+            //User user2 =userMap.get(users.get(1).getMobile());
+            User user2=users.get(1);
             if(groupHashMap.containsKey(user2.getName()))
                 throw new Exception("Personal Chat is already available");
             Group group=new Group(user2.getName(),2);
@@ -82,7 +84,8 @@ public class WhatsappRepository {
         // if all user already exist and its not personal chat then  we create the group with given details
 //        customGroupCount++;
         String groupName="Group "+customGroupCount++;
-        User admin=userMap.get(users.get(0).getMobile());
+//        User admin=userMap.get(users.get(0).getMobile());
+        User admin=users.get(0);
         List<User> groupMembers=new ArrayList<>();
         for(User user:users){
             groupMembers.add(userMap.get(user.getMobile()));
@@ -109,10 +112,10 @@ public class WhatsappRepository {
         if(!groupHashMap.containsKey(group.getName())){
             throw new Exception("Group does not exit");
         }
-        if(!userMap.containsKey(sender.getMobile())){
-            throw new Exception("Sender does not exist");
-        }
-        sender=userMap.get(sender.getMobile());
+//        if(!userMap.containsKey(sender.getMobile())){
+//            throw new Exception("Sender does not exist");
+//        }
+//        sender=userMap.get(sender.getMobile());
         group=groupHashMap.get(group.getName());
         List<User> users=groupUserMap.get(group);
         for(User user: users){
@@ -148,10 +151,10 @@ public class WhatsappRepository {
             throw new Exception("Group does not exist");
         }
         group=groupHashMap.get(group.getName());
-        if(!userMap.containsKey(user.getMobile())){
-            throw new Exception("User doesn't exist");
-        }
-        user=userMap.get(user.getMobile());
+//        if(!userMap.containsKey(user.getMobile())){
+//            throw new Exception("User doesn't exist");
+//        }
+//        user=userMap.get(user.getMobile());
         if(user.equals(adminMap.get(group))){
             throw new Exception("Approver does not have rights");
         }
@@ -180,10 +183,10 @@ public class WhatsappRepository {
         //If user is removed successfully, return (the updated number of users in the group +
         // the updated number of messages in group + the updated number of overall messages)
 
-        if(!userMap.containsKey(user.getMobile())){
-            throw new Exception("User not found");
-        }
-        user=userMap.get(user.getMobile());
+//        if(!userMap.containsKey(user.getMobile())){
+//            throw new Exception("User not found");
+//        }
+//        user=userMap.get(user.getMobile());
         boolean isPartOfGroup=false;
         Group group=null;
         for(Group group1: groupUserMap.keySet()){
